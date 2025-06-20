@@ -1,16 +1,25 @@
-import React from 'react';
+'use client';
+import React, { useRef, useState, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { emotionStore } from '../../store/emotionStore';
 import { EmotionCard } from '../../components/EmotionCard';
-import { useRef, useState } from 'react';
-
-const isMobile = () => window.innerWidth <= 600;
 
 export const EmotionBoard: React.FC = observer(() => {
   const [draggedId, setDraggedId] = useState<string | null>(null);
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
   const [swipedId, setSwipedId] = useState<string | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isHydrated, setIsHydrated] = useState(false);
   const boardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 600);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  useEffect(() => { setIsHydrated(true); }, []);
 
   const handleDragStart = (id: string) => setDraggedId(id);
   const handleDragOver = (id: string) => {
@@ -46,7 +55,11 @@ export const EmotionBoard: React.FC = observer(() => {
     setSwipedId(null);
   };
 
-  if (isMobile()) {
+  if (!isHydrated) {
+    return null;
+  }
+
+  if (isMobile) {
     return (
       <div className="emotion-list" ref={boardRef}>
         {emotionStore.emotions.map(card => (

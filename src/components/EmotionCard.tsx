@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import type { EmotionCard as EmotionCardType } from '../store/emotionStore';
 

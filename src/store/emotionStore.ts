@@ -40,17 +40,21 @@ class EmotionStore {
   }
 
   saveToStorage() {
-    localStorage.setItem(EMOTIONS_KEY, JSON.stringify(this.emotions));
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(EMOTIONS_KEY, JSON.stringify(this.emotions));
+    }
   }
 
   loadFromStorage() {
-    const data = localStorage.getItem(EMOTIONS_KEY);
-    if (data) {
-      try {
-        runInAction(() => {
-          this.emotions = JSON.parse(data);
-        });
-      } catch {}
+    if (typeof window !== 'undefined') {
+      const data = localStorage.getItem(EMOTIONS_KEY);
+      if (data) {
+        try {
+          runInAction(() => {
+            this.emotions = JSON.parse(data);
+          });
+        } catch {}
+      }
     }
   }
 }

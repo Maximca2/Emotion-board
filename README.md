@@ -52,3 +52,16 @@ export default tseslint.config({
   },
 })
 ```
+
+# Emotion-board
+
+Проект мігрує на Next.js
+
+## Запуск
+
+```bash
+npm install
+npm run dev
+```
+
+Відкрийте http://localhost:3000
