@@ -53,7 +53,9 @@ class EmotionStore {
           runInAction(() => {
             this.emotions = JSON.parse(data);
           });
-        } catch {}
+        } catch(e) {
+          console.error(e);
+        }
       }
     }
   }
