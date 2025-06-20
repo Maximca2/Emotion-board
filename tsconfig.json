@@ -3,14 +3,16 @@
   "references": [
     {
       "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.node.json"
     }
   ],
   "compilerOptions": {
     "composite": true,
     "emitDeclarationOnly": false,
     "types": [
-      "next",
-      "next/types/global"
+      "next"
     ],
     "target": "ES2017",
     "lib": [
