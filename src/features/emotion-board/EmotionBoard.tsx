@@ -27,7 +27,7 @@ export const EmotionBoard: React.FC = observer(() => {
   };
   const handleDragEnd = () => setDraggedId(null);
 
-  const handleTouchStart = (e: React.TouchEvent, id: string) => {
+  const handleTouchStart = (e: React.TouchEvent) => {
     setTouchStartX(e.touches[0].clientX);
     setSwipedId(null);
   };
@@ -60,7 +60,7 @@ export const EmotionBoard: React.FC = observer(() => {
               handleDragOver(card.id);
             }}
             onDragEnd={handleDragEnd}
-            onTouchStart={e => handleTouchStart(e, card.id)}
+            onTouchStart={e => handleTouchStart(e)}
             onTouchMove={e => handleTouchMove(e, card.id)}
             onTouchEnd={() => handleTouchEnd(card.id)}
             style={{
